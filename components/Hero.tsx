@@ -1,11 +1,10 @@
-'use client'
+"use client";
 
 import { CustomButton } from ".";
-
+import Image from "next/image";
 
 const Hero = () => {
-
-    const handleScroll=()=>{}
+  const handleScroll = () => {};
   return (
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
@@ -13,9 +12,21 @@ const Hero = () => {
           Find, book and rent a car --quickly and easily!
         </h1>
         <p className="hero__subtitle">
-            Streamline your car rental experience with our effortless booking process.
+          Streamline your car rental experience with our effortless booking
+          process.
         </p>
-        <CustomButton handleClick={handleScroll} title="Explore Cars" containerStyles="bg-primary-blue text-white rounded-full mt-10"/>
+        <CustomButton
+          handleClick={handleScroll}
+          title="Explore Cars"
+          containerStyles="bg-primary-blue text-white rounded-full mt-10"
+        />
+      </div>
+
+      <div className="hero__image-container">
+        <div className="hero__image">
+          <Image src="/hero.png" alt="hero" fill className="object-contain" />
+          <div className="hero__image-overlay" />
+        </div>
       </div>
     </div>
   );
