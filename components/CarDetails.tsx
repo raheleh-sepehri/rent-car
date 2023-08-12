@@ -1,9 +1,9 @@
 "use client";
-
 import { CardDetailsProps } from "@/types";
 import React, { Fragment } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
+import { generateCarImageUrl } from "@/utils";
 
 const CarDetails = ({ isOpen, close, car }: CardDetailsProps) => {
   const keys = [];
@@ -54,17 +54,17 @@ const CarDetails = ({ isOpen, close, car }: CardDetailsProps) => {
                     <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
                       <Image
                         alt="car"
-                        src="/hero.png"
+                        src={generateCarImageUrl(car)}
                         fill
                         priority
                         className="object-contain"
                       />
                     </div>
                     <div className="flex gap-3">
-                      <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <div className="flex-1 relative  w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
                           alt="car"
-                          src="/hero.png"
+                          src={generateCarImageUrl(car,'33')}
                           fill
                           priority
                           className="object-contain"
@@ -73,7 +73,7 @@ const CarDetails = ({ isOpen, close, car }: CardDetailsProps) => {
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
                           alt="car"
-                          src="/hero.png"
+                          src={generateCarImageUrl(car,'29')}
                           fill
                           priority
                           className="object-contain"
@@ -82,7 +82,7 @@ const CarDetails = ({ isOpen, close, car }: CardDetailsProps) => {
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
                           alt="car"
-                          src="/hero.png"
+                          src={generateCarImageUrl(car,'13')}
                           fill
                           priority
                           className="object-contain"
@@ -96,9 +96,16 @@ const CarDetails = ({ isOpen, close, car }: CardDetailsProps) => {
                     </h2>
                     <div className="flex-1 flex flex-col mt-3 gap-4 flex-wrap">
                       {Object.entries(car).map(([key, value]) => (
-                        <div key={key} className="flex justify-between items-center w-full">
-                          <h4 className="text-grey capitalize">{key.split("_").join(" ")}</h4>
-                          <p className="text-black-100 font-semibold">{value}</p>
+                        <div
+                          key={key}
+                          className="flex justify-between items-center w-full"
+                        >
+                          <h4 className="text-grey capitalize">
+                            {key.split("_").join(" ")}
+                          </h4>
+                          <p className="text-black-100 font-semibold">
+                            {value}
+                          </p>
                         </div>
                       ))}
                     </div>
