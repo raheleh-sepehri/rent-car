@@ -2,8 +2,8 @@
 import { CarProps } from "@/types";
 import { calculateCarRent } from "@/utils";
 import Image from "next/image";
-import React from "react";
-import { CustomButton } from ".";
+import React, { useState } from "react";
+import { CarDetails, CustomButton } from ".";
 
 interface CarCardProps {
   car: CarProps;
@@ -12,6 +12,7 @@ interface CarCardProps {
 const CarCard = ({ car }: CarCardProps) => {
   const { city_mpg, year, model, make, drive, transmission } = car;
   const carRent = calculateCarRent(city_mpg, year);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="car-card group">
@@ -60,10 +61,13 @@ const CarCard = ({ car }: CarCardProps) => {
       <div className="w-full mt-12">
         <CustomButton
           title="View more"
-          containerStyles="rounded-full hover:transition-all  hover:ease-in-out hover:duration-100 hover:border-non hover:ring-2 hover:bg-white hover:ring-primary-blue hover:text-black bg-primary-blue w-full py-[16px] text-white text-[14px] leading-[17px] font-bold "
+          containerStyles="rounded-full hover:border-non hover:ring-2 hover:ring-primary-blue  bg-primary-blue w-full py-[16px] text-white text-[14px] leading-[17px] font-bold "
           btnType="button"
+          handleClick={() => setIsOpen(true)}
+          rightIcon="/right-arrow.svg"
         />
       </div>
+      <CarDetails isOpen={isOpen} close={()=>setIsOpen(false)} car={car} />
     </div>
   );
 };
