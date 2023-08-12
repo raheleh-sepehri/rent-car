@@ -5,6 +5,7 @@ export interface CustomButtonProps {
   containerStyles?: string;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
   btnType?: "button" | "submit" | "reset";
+  rightIcon?: string;
 }
 
 export interface SearchManufactureProps {
@@ -24,4 +25,10 @@ export interface CarProps {
   model: string;
   transmission: string;
   year: number;
+}
+
+export interface CardDetailsProps {
+  isOpen: boolean;
+  close: () => void;
+  car: CarProps;
 }
