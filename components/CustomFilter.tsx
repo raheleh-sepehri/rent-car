@@ -8,10 +8,27 @@ import React from "react";
 import { CustomFilterProps } from "@/types";
 
 const CustomFilter = ({ title, options }: CustomFilterProps) => {
+  const router = useRouter();
+
+  const updateHandleParams = (e: { title: string; value: string }) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set(title, e.value.toLocaleLowerCase());
+    const newPathName = `${
+      window.location.pathname
+    }?${searchParams.toString()}`;
+    router.push(newPathName);
+  };
+
   const [selected, useSelected] = useState(options[0]);
   return (
     <div className="w-fit">
-      <Listbox value={selected} onChange={(e) => useSelected(e)}>
+      <Listbox
+        value={selected}
+        onChange={(e) => {
+          useSelected(e);
+          updateHandleParams(e);
+        }}
+      >
         <div className="relative z-10 w-fit">
           <Listbox.Button className="custom-filter__btn">
             <span className="block truncate">{selected.title}</span>
