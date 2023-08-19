@@ -6,16 +6,14 @@ import { Listbox, Transition } from "@headlessui/react";
 
 import React from "react";
 import { CustomFilterProps } from "@/types";
+import { updateSearchParams } from "@/utils";
 
 const CustomFilter = ({ title, options }: CustomFilterProps) => {
   const router = useRouter();
 
   const updateHandleParams = (e: { title: string; value: string }) => {
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set(title, e.value.toLocaleLowerCase());
-    const newPathName = `${
-      window.location.pathname
-    }?${searchParams.toString()}`;
+    
+    const newPathName=updateSearchParams(title,e.value)
     router.push(newPathName);
   };
 
