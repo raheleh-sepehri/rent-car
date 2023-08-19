@@ -1,12 +1,12 @@
 "use client";
-import { CarCard, CustomFilter, Hero, SearchBar } from "@/components";
-import { fuels, manufacturers, yearsOfProduction } from "@/constants";
+import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from "@/components";
+import { fuels, yearsOfProduction } from "@/constants";
 import { FilterProps } from "@/types";
 import { fetchCars } from "@/utils";
 
 import Image from "next/image";
 
-export default async function Home({ searchParams }: FilterProps) {
+export default async function Home({ searchParams }) {
   const { manufacture, year, limit, fuel, model } = searchParams;
   const allCars = await fetchCars({
     manufacture: manufacture || "",
@@ -28,7 +28,7 @@ export default async function Home({ searchParams }: FilterProps) {
         </div>
         <div className="home__filters">
           <SearchBar />
-          <div className="home__filter-container">
+          <div className="home__filter-container ">
             <CustomFilter title="fuel" options={fuels} />
             <CustomFilter title="year" options={yearsOfProduction} />
           </div>
@@ -41,6 +41,10 @@ export default async function Home({ searchParams }: FilterProps) {
                 <CarCard car={car} />
               ))}
             </div>
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className="home__error-container">
